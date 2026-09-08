@@ -189,10 +189,10 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 
 .marca img{width:clamp(112px,12vw,152px);height:auto}
 
-.nav{display:flex;gap:clamp(1rem,2.2vw,2rem);margin-left:auto}
+.nav{display:flex;gap:clamp(.85rem,1.7vw,1.6rem);margin-left:auto}
 .nav a{
   position:relative;
-  font-size:.74rem;letter-spacing:.19em;text-transform:uppercase;
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap;
   color:var(--txt-2);padding-block:.4rem;
   transition:color .25s var(--suave);
 }
@@ -247,7 +247,7 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
     linear-gradient(0deg,#000 1%,transparent 24%);
 }
 .hero-in{position:relative;z-index:1}
-.hero-txt{max-width:min(54ch,58%)}
+.hero-txt{max-width:min(56ch,60%)}
 
 .hero-h1{
   font:600 clamp(2.05rem,1.4rem + 2.2vw,3.1rem)/1.1 var(--display);
@@ -262,7 +262,14 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
   color:transparent;
 }
 .hero-sub{color:var(--txt-2);max-width:52ch;font-size:1.06rem;margin-bottom:2.1rem}
+.hero-apoio{
+  margin:-.9rem 0 2rem;padding-left:1rem;
+  border-left:1px solid var(--ouro-qm);
+  font-size:.98rem;color:var(--txt-2);
+}
+.hero-apoio strong{color:var(--ouro);font-weight:600}
 .hero-acoes{display:flex;flex-wrap:wrap;gap:.9rem}
+.hero-acoes .btn{flex:1 1 250px;padding-inline:1.3rem}
 .hero-micro{
   margin:1.5rem 0 0;color:#8b8271;
   font-size:.79rem;letter-spacing:.13em;text-transform:uppercase;
@@ -449,6 +456,182 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 .dif-lista p{color:var(--txt-2);font-size:.9rem;margin:0}
 
 /* =========================================================================
+   GARGALOS · leitura de diagnóstico, não vitrine de serviço
+   ========================================================================= */
+
+.gargs{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:0 clamp(2rem,4vw,3.5rem);
+}
+.garg{
+  display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;
+  padding:1.3rem 0;
+  border-top:1px solid #1c1609;
+  transition:border-color .35s var(--suave);
+}
+.garg:hover{border-top-color:#4a3410}
+.garg-ic{
+  grid-row:1 / span 2;
+  width:24px;height:24px;margin-top:.25rem;
+  stroke:var(--ouro);fill:none;
+  transition:transform .4s var(--saida);
+}
+.garg:hover .garg-ic{transform:translateY(-2px)}
+.garg h3{
+  font:600 .82rem/1 var(--corpo);
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ouro);margin:.15rem 0 0;
+}
+.garg p{margin:0;color:var(--txt-2);font-size:.94rem}
+
+/* fecho da seção */
+
+.garg-fecho{
+  margin-top:clamp(2.5rem,5vw,3.5rem);
+  text-align:center;
+  display:grid;justify-items:center;gap:1.6rem;
+}
+.garg-fecho p{
+  max-width:56ch;margin:0;
+  font:500 clamp(1.05rem,.95rem + .55vw,1.3rem)/1.5 var(--display);
+  font-style:italic;color:var(--ouro);
+}
+
+/* =========================================================================
+   VELAR SALES SYSTEM · a marca da metodologia
+   ========================================================================= */
+
+.vss-marca{
+  display:inline-block;margin:0 0 1.1rem;
+  padding:.5rem 1.15rem;
+  border:1px solid #46300f;border-radius:100px;
+  background:rgba(233,194,90,.05);
+  font:600 .74rem/1 var(--corpo);
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ouro);
+}
+.vss-marca .tm{font-size:.7em;letter-spacing:0;vertical-align:super}
+
+/* =========================================================================
+   VELAR SALES SYSTEM · o fluxo como diagrama, não como fila quebrada
+   ========================================================================= */
+
+.vss-fluxo{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  margin:clamp(2.5rem,5vw,3.5rem) auto;
+  max-width:900px;
+  background:#1b1509;
+  border:1px solid #1b1509;border-radius:6px;overflow:hidden;
+}
+.vss-fluxo li{
+  position:relative;
+  display:flex;align-items:center;gap:.85rem;
+  padding:1.15rem 1.25rem;
+  background:linear-gradient(160deg,#0d0b07,#070605);
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#b5aa92;
+  transition:background .3s var(--suave),color .3s var(--suave);
+}
+.vss-fluxo li:hover{background:linear-gradient(160deg,#15110a,#0b0906);color:var(--ouro)}
+.vss-n{
+  font:600 .78rem/1 var(--display);
+  color:transparent;-webkit-text-stroke:.7px #8a6420;
+  letter-spacing:0;flex:none;
+  transition:-webkit-text-stroke-color .3s var(--suave);
+}
+.vss-fluxo li:hover .vss-n{-webkit-text-stroke-color:var(--ouro)}
+/* a última etapa fecha o ciclo e volta pro começo */
+.vss-fluxo li:last-child{color:var(--ouro)}
+.vss-fluxo li:last-child .vss-n{-webkit-text-stroke-color:var(--ouro)}
+
+/* =========================================================================
+   ENGENHARIAS · peças da estrutura, não lista de serviço
+   ========================================================================= */
+
+.engs{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1rem}
+.eng{
+  position:relative;
+  padding:1.6rem 1.35rem 1.3rem;
+  background:linear-gradient(180deg,rgba(18,16,12,.86),rgba(8,7,5,.92));
+  border:1px solid var(--borda);border-radius:6px;
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+  display:flex;flex-direction:column;
+  transition:transform .35s var(--saida),border-color .35s var(--suave),box-shadow .35s var(--suave);
+}
+.eng::before{
+  content:"";position:absolute;inset:0 0 auto;height:1px;
+  background:linear-gradient(90deg,transparent,#6b4813 25%,var(--ouro-md) 50%,#6b4813 75%,transparent);
+  opacity:.45;transition:opacity .35s var(--suave);
+}
+.eng:hover{transform:translateY(-4px);border-color:#2e2411;box-shadow:0 18px 40px -22px #000}
+.eng:hover::before{opacity:1}
+
+.eng-ic{width:26px;height:26px;margin-bottom:.95rem;stroke:var(--ouro);fill:none}
+.eng h3{
+  font:600 .82rem/1 var(--corpo);
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ouro);margin:0 0 1rem;
+}
+.eng ul{display:grid;gap:.45rem;margin:0 0 1.35rem}
+.eng li{
+  display:flex;gap:.55rem;align-items:flex-start;
+  font-size:.9rem;color:#cfc7b8;line-height:1.45;
+}
+.eng li::before{
+  content:"";width:8px;height:8px;flex:none;margin-top:.42rem;
+  background:var(--ouro-qm);
+  -webkit-mask:var(--estrela) center/contain no-repeat;
+  mask:var(--estrela) center/contain no-repeat;
+}
+.eng .card-link{margin-top:auto}
+
+/* =========================================================================
+   PARA QUEM · sintomas, não benefícios
+   ========================================================================= */
+
+.quem{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:0 clamp(2rem,4vw,3.5rem);
+}
+.quem li{
+  display:flex;gap:.9rem;align-items:flex-start;
+  padding:1.05rem 0;
+  border-bottom:1px solid #1c1609;
+  font-size:.97rem;color:#cfc7b8;
+  transition:color .3s var(--suave);
+}
+.quem li::before{
+  content:"";width:11px;height:11px;flex:none;margin-top:.5rem;
+  background:var(--ouro-md);
+  -webkit-mask:var(--estrela) center/contain no-repeat;
+  mask:var(--estrela) center/contain no-repeat;
+}
+.quem li:hover{color:var(--txt)}
+
+.quem-fecho{
+  margin:clamp(2.5rem,5vw,3.25rem) auto 0;max-width:60ch;text-align:center;
+  font:500 clamp(1.05rem,.95rem + .55vw,1.3rem)/1.5 var(--display);
+  font-style:italic;color:var(--ouro);
+}
+
+/* =========================================================================
+   SOBRE · papel e bloco de formação
+   ========================================================================= */
+
+.sobre-papel{
+  margin:-.35rem 0 1.5rem;
+  font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ouro);
+}
+.formacao-bloco{margin-top:2rem;padding-top:1.6rem;border-top:1px solid #1e1809}
+.formacao-tit{
+  font:600 .7rem/1 var(--corpo);
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--txt-2);margin:0 0 1rem;
+}
+
+/* =========================================================================
    SOBRE
    ========================================================================= */
 
@@ -469,12 +652,12 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 .sobre-foto::after{bottom:-10px;right:-10px;border-bottom:1px solid var(--ouro-md);border-right:1px solid var(--ouro-md)}
 
 .sobre-txt p{color:#cfc7b8;max-width:64ch}
-.formacoes{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.9rem 0}
+.formacoes{display:flex;flex-wrap:wrap;gap:.45rem;margin:0}
 .formacoes li{
   padding:.42rem .85rem;
   border:1px solid #33260f;border-radius:100px;
-  font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
-  color:#a89d86;
+  font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
+  color:#8f8674;
   transition:border-color .3s var(--suave),color .3s var(--suave);
 }
 .formacoes li:hover{border-color:var(--ouro-md);color:var(--ouro)}
@@ -838,6 +1021,7 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
   .hero-acoes{flex-direction:column;align-items:stretch}
   .hero-acoes .btn{width:100%}
 
+  .vss-fluxo{grid-template-columns:1fr}
   .eco-fluxo{flex-direction:column;gap:.5rem}
   .eco-fluxo li{width:100%;max-width:290px}
   .eco-fluxo li:not(:last-child)::after{
@@ -901,7 +1085,7 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 
 /* o rei de xadrez ocupa a faixa esquerda; o conteúdo desliza pra direita */
 @media (min-width:1080px){
-  .dif-in{padding-left:33%}
+  .dif-in{padding-left:29%}
   .dif-lista{grid-template-columns:1fr 1fr;gap:1.75rem 2.6rem}
-  .dif-txt{max-width:40ch}
+  .dif-txt{max-width:52ch}
 }
