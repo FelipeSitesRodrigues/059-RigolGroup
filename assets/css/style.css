@@ -1133,7 +1133,8 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
   }
   .hero-sub{margin-bottom:1.9rem}
   .hero-acoes{flex-direction:column;align-items:stretch}
-  .hero-acoes .btn{width:100%}
+  /* em coluna, o flex-basis de 250px vira ALTURA e o grow estica: zerar o flex */
+  .hero-acoes .btn{flex:0 0 auto;width:100%}
 
   .vss-fluxo{grid-template-columns:1fr}
   .eco-fluxo{flex-direction:column;gap:.5rem}
