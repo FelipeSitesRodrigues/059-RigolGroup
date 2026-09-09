@@ -124,6 +124,10 @@ principal é `--ouro: #E9C25A`. As três estruturas têm metais próprios:
 `--metal-aco` na Essencial, `--metal-prata` na Crescimento e `--metal` na
 Avançada.
 
+O Start tem cor própria, `--verde: #7FD8A4`, e é o único verde da página. Ele fica
+fora da hierarquia dos três metais de propósito, porque não é um quarto plano, é a
+porta de entrada.
+
 ### Testar antes de subir
 
 ```

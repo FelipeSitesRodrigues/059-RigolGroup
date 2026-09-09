@@ -23,6 +23,9 @@
   --metal-aco:linear-gradient(160deg,#EAF5FD 0%,#A9CFEA 34%,#6C9CC6 68%,#31536F 100%);
   --prata:#D6DAE1;
   --metal-prata:linear-gradient(160deg,#FBFBFD 0%,#D6DAE1 34%,#9AA0AA 68%,#4E535B 100%);
+  /* o verde vive so no Start, a porta de entrada. fora da hierarquia dos tres metais. */
+  --verde:#7FD8A4;
+  --metal-verde:linear-gradient(160deg,#DFF7E8 0%,#7FD8A4 34%,#3E9C6B 68%,#164A31 100%);
 
   /* texto */
   --txt:#F2EDE3;
@@ -742,6 +745,7 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 .m-aco{--tom:var(--aco);--tom-metal:var(--metal-aco);--tom-borda:#2f4d66;--tom-forte:#7FB3D8}
 .m-prata{--tom:var(--prata);--tom-metal:var(--metal-prata);--tom-borda:#4b5058;--tom-forte:#B9BFC8}
 .m-ouro{--tom:var(--ouro);--tom-metal:var(--metal);--tom-borda:#6b4813;--tom-forte:var(--ouro-md)}
+.m-verde{--tom:var(--verde);--tom-metal:var(--metal-verde);--tom-borda:#2c5c42;--tom-forte:#5FBF89}
 
 .plano .plano-nome{color:var(--tom)}
 .plano .plano-preco{background-image:var(--tom-metal)}
@@ -770,6 +774,115 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
   border:1px solid #241c0c;border-radius:5px;
   color:var(--txt-2);font-size:.88rem;
 }
+
+
+/* =========================================================================
+   START
+   A porta de entrada, pra quem a estrutura completa ainda nao cabe.
+   Verde: unico lugar da pagina onde ele aparece, justamente pra separar
+   o Start dos tres metais das estruturas.
+   ========================================================================= */
+
+.start{
+  margin-top:clamp(3.5rem,7vw,5.5rem);
+  padding:clamp(1.9rem,3.4vw,3rem);
+  background:linear-gradient(180deg,#0B120E,#060807);
+  border:1px solid #1a2a20;border-radius:9px;
+  position:relative;overflow:hidden;
+}
+.start::before{
+  content:"";position:absolute;inset:0 0 auto;height:1px;
+  background:linear-gradient(90deg,transparent,var(--tom-borda) 25%,var(--tom) 50%,var(--tom-borda) 75%,transparent);
+}
+/* solido, igual ao .ouro: em duas linhas o gradiente escurece a segunda */
+.verde{color:var(--verde)}
+
+.start-cab{max-width:70ch;margin-bottom:clamp(1.9rem,3.4vw,2.6rem)}
+.start-tag{
+  font:600 .7rem/1 var(--corpo);letter-spacing:.26em;text-transform:uppercase;
+  color:var(--verde);margin:0 0 .85rem;
+}
+.start-t{
+  font:600 clamp(1.5rem,1.1rem + 1.3vw,2.2rem)/1.18 var(--display);
+  margin:0 0 .9rem;color:var(--txt);
+}
+.start-apoio{margin:0;color:var(--txt-2);font-size:.95rem;line-height:1.65}
+
+.start-corpo{
+  display:grid;grid-template-columns:minmax(250px,.85fr) 1.15fr;gap:clamp(1.4rem,2.6vw,2.4rem);
+  align-items:start;
+}
+
+.start-preco-bl{
+  padding:1.7rem 1.5rem;
+  background:linear-gradient(180deg,#0E1611,#070A08);
+  border:1px solid #21362a;border-radius:7px;
+  display:flex;flex-direction:column;
+}
+.start-nome{
+  font:400 1.28rem/1.25 var(--display);color:var(--txt);margin:0 0 1.1rem;
+}
+.start-nome strong{font-weight:600;color:var(--verde)}
+.start-rot{
+  font:600 .68rem/1 var(--corpo);letter-spacing:.2em;text-transform:uppercase;
+  color:#6f7d74;margin:0 0 .7rem;
+}
+.start .start-preco{background-image:var(--metal-verde);margin:0 0 1.1rem;font-size:2.4rem}
+.start-nota{
+  margin:0 0 1.6rem;padding-top:1.1rem;border-top:1px solid #1b2a21;
+  color:var(--txt-2);font-size:.82rem;line-height:1.6;
+}
+.start-cta{margin-top:auto;width:100%}
+
+.start-inc{
+  padding:1.7rem 1.6rem;
+  border:1px solid #1a2a20;border-radius:7px;
+  background:rgba(255,255,255,.014);
+}
+.start-itens{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  gap:.75rem 1.6rem;
+}
+.start-itens li{
+  display:flex;gap:.6rem;align-items:flex-start;
+  font-size:.9rem;line-height:1.5;color:#c4cdc7;
+}
+.start-itens li::before{
+  content:"";width:9px;height:9px;flex:none;margin-top:.4rem;
+  background:var(--tom-forte);
+  -webkit-mask:var(--estrela) center/contain no-repeat;
+  mask:var(--estrela) center/contain no-repeat;
+}
+
+.start-notas{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;
+  margin-top:1.5rem;
+}
+.start-nb{
+  padding:1.1rem 1.2rem;border-radius:6px;
+  border:1px solid #1a2a20;border-left:2px solid var(--tom-borda);
+  background:rgba(127,216,164,.028);
+}
+.start-nb-t{
+  font:600 .66rem/1 var(--corpo);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--verde);margin:0 0 .6rem;
+}
+.start-nb p{margin:0;color:var(--txt-2);font-size:.85rem;line-height:1.55}
+.start-vl{color:var(--txt);font-weight:600}
+
+.start-resumo{
+  margin:1.5rem 0 0;padding:1.25rem 1.5rem;
+  border:1px solid #21362a;border-radius:6px;
+  background:linear-gradient(180deg,#0D1712,#070A08);
+  color:var(--txt-2);font-size:.9rem;line-height:1.65;
+}
+.start-resumo-t{
+  display:block;
+  font:600 .66rem/1 var(--corpo);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--verde);margin-bottom:.55rem;
+}
+.start-resumo strong{color:var(--txt);font-weight:600}
 
 /* =========================================================================
    TABELA COMPARATIVA
@@ -986,6 +1099,7 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 }
 
 @media (max-width:860px){
+  .start-corpo{grid-template-columns:1fr}
   .nav{
     position:fixed;inset:0 0 auto;top:0;
     flex-direction:column;gap:0;margin:0;
@@ -1063,6 +1177,8 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 
 @media (max-width:520px){
   .card,.plano{padding-inline:1.35rem}
+  .start{padding-inline:1.25rem}
+  .start-preco-bl,.start-inc{padding-inline:1.2rem}
   .prova-lista li:not(:last-child)::after{width:7px;height:7px}
   .zap{width:50px;height:50px;right:.85rem;bottom:.85rem}
   .zap svg{width:25px;height:25px}

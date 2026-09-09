@@ -47,6 +47,18 @@ A mesma classe colore as colunas da tabela comparativa.
 Os três metais vivem **só nos planos e na tabela**. No resto da página o acento
 continua sendo o ouro sozinho, senão a escala vira enfeite.
 
+## O verde do Start
+
+O Start usa `--verde` `#7FD8A4` e `--metal-verde`, pela classe `.m-verde`, que
+herda pelo mesmo mecanismo de `--tom`. Ele é **o único verde da página** e está
+fora da escala de frio pra quente de propósito: se o Start entrasse como um quarto
+metal, viraria o plano mais barato da mesma régua. Sendo outra cor, ele lê como
+outra categoria, que é o que ele é, a porta de entrada.
+
+Uma diferença: `.verde` é cor sólida, não gradiente, ao contrário de `--metal-verde`
+que só é usado no preço e no botão. Em título de duas linhas o `background-clip`
+escurece a segunda linha, e o título do Start quebra em duas.
+
 **Cuidado ao mexer:** o preço usa `background-clip: text`. Trocar o gradiente com
 o atalho `background` zera o clip e o preço vira uma barra sólida. Use sempre
 `background-image`.
