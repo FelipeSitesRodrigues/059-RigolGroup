@@ -47,6 +47,26 @@ A mesma classe colore as colunas da tabela comparativa.
 Os três metais vivem **só nos planos e na tabela**. No resto da página o acento
 continua sendo o ouro sozinho, senão a escala vira enfeite.
 
+## A esteira das provas
+
+Os prints andam sozinhos numa faixa que nunca para. O truque é a pista carregar
+os cards **duas vezes** (a cópia é feita pelo JavaScript) e a animação andar até
+`translateX(-50%)`: quando ela volta ao zero, o desenho na tela é exatamente o
+mesmo, então a emenda não aparece.
+
+A faixa para quando o mouse entra, quando algum card recebe foco de teclado e
+quando a lente está aberta. Em `prefers-reduced-motion` a animação some e a faixa
+vira rolagem horizontal normal, sem a cópia dos cards, pra não repetir tudo no
+leitor de tela.
+
+As bordas da faixa usam `mask` com gradiente, pra imagem entrar e sair desbotando
+em vez de aparecer cortada.
+
+A lente é `<dialog>` nativo, que já traz Esc, foco preso dentro e fundo escuro de
+graça. A imagem grande só é baixada quando a lente abre: o card carrega a versão
+de 480px e o `src` da versão de 1000px é preenchido na hora do clique. Sem isso a
+seção sozinha pesaria meio mega.
+
 ## O verde do Start
 
 O Start usa `--verde` `#7FD8A4` e `--metal-verde`, pela classe `.m-verde`, que

@@ -76,6 +76,78 @@
     for (var k = 0; k < alvos.length; k++) olho.observe(alvos[k]);
   }
 
+
+  /* ---------- provas: esteira contínua e lente ----------
+     a esteira só duplica os cards quando há animação. no modo calmo a
+     faixa vira rolagem normal e a cópia seria só ruído pro leitor de tela. */
+  var pista = document.getElementById('provasPista');
+  var lente = document.getElementById('lente');
+
+  if (pista && !calmo) {
+    var copia = pista.cloneNode(true);
+    var clones = copia.querySelectorAll('.prova-c');
+    for (var c = 0; c < clones.length; c++) {
+      clones[c].setAttribute('tabindex', '-1');
+      clones[c].setAttribute('aria-hidden', 'true');
+    }
+    while (copia.firstChild) pista.appendChild(copia.firstChild);
+  }
+
+  if (pista && lente && typeof lente.showModal === 'function') {
+    var fichas = [];
+    var originais = document.querySelectorAll('.provas-pista .prova-c');
+    for (var f = 0; f < originais.length; f++) {
+      if (originais[f].getAttribute('aria-hidden') === 'true') continue;
+      fichas.push({
+        img: originais[f].getAttribute('href'),
+        alt: originais[f].querySelector('img').getAttribute('alt'),
+        tit: originais[f].getAttribute('data-tit'),
+        leg: originais[f].getAttribute('data-leg')
+      });
+    }
+
+    var lImg = document.getElementById('lenteImg');
+    var lTit = document.getElementById('lenteTit');
+    var lLeg = document.getElementById('lenteLeg');
+    var atual = 0;
+
+    function mostra(n) {
+      atual = (n + fichas.length) % fichas.length;
+      var d = fichas[atual];
+      lImg.src = d.img;
+      lImg.alt = d.alt;
+      lTit.textContent = d.tit;
+      lLeg.textContent = d.leg;
+    }
+
+    pista.addEventListener('click', function (e) {
+      var card = e.target.closest ? e.target.closest('.prova-c') : null;
+      if (!card) return;
+      e.preventDefault();
+      mostra(parseInt(card.getAttribute('data-i'), 10) || 0);
+      document.body.classList.add('lente-on');
+      lente.showModal();
+    });
+
+    lente.addEventListener('close', function () {
+      document.body.classList.remove('lente-on');
+      lImg.removeAttribute('src');
+    });
+
+    document.getElementById('lenteX').addEventListener('click', function () { lente.close(); });
+    document.getElementById('lenteAnt').addEventListener('click', function () { mostra(atual - 1); });
+    document.getElementById('lenteProx').addEventListener('click', function () { mostra(atual + 1); });
+
+    lente.addEventListener('click', function (e) {
+      if (e.target === lente) lente.close();
+    });
+
+    lente.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); mostra(atual - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); mostra(atual + 1); }
+    });
+  }
+
   /* ---------- FAQ: abre e FECHA animado ----------
      o details nativo some com o conteúdo na hora, então o fechamento
      é segurado aqui até a transição terminar. */

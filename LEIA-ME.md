@@ -12,7 +12,9 @@ site/
     img/           hero, xadrez, montanhas, logo e foto do Gelson, em webp
 ```
 
-Peso total: 492 KB, sendo 408 KB de imagem. Carrega rápido no 4G.
+Peso total da pasta: 1,2 MB. Mas metade disso são as versões grandes dos prints
+da seção de Provas, que só são baixadas quando alguém clica num print. O primeiro
+carregamento fica em torno de 750 KB, e a maior parte é imagem.
 
 ---
 
@@ -88,15 +90,13 @@ Basta um listener no `main.js`.
 
 ## O que ficou de fora, de propósito
 
-**Cases.** O briefing pede uma seção de cases e ela não entrou, porque o Gelson
-não mandou nenhum. Tem um comentário no `index.html` marcando o lugar e o formato
-que cada case precisa seguir: cenário, problema, estratégia, implementação,
-resultado. Enquanto não existir, **Cases também fica fora do menu**, pra não
-virar link morto.
+**Cases escritos.** A seção de Provas entrou com print de conversa, que é o que
+existia. Case no formato cenário, problema, estratégia, implementação e resultado
+ainda não existe, e o comentário no `index.html` continua marcando o lugar.
 
-O que pedir pro Gelson: dois ou três casos escritos nesse formato, print de
-painel com o dado sensível borrado, antes e depois de perfil (nunca de paciente)
-e autorização por escrito de cada clínica.
+O que pedir pro Gelson: dois ou três casos escritos nesse formato, autorização por
+escrito de cada clínica que aparece nos prints, e antes e depois de perfil (nunca
+de paciente).
 
 **Números de resultado.** Nenhum número de cliente, faturamento ou percentual
 aparece na página, porque não existe prova. A faixa abaixo do hero descreve como
@@ -116,6 +116,53 @@ ffmpeg -i entrada.png -vf "scale=1672:-2" -q:v 82 assets/img/hero-desktop.webp
 ```
 
 O original de cada uma está em `../Recursos Site/`.
+
+### Mexer nas Provas
+
+A seção `#provas` é uma esteira contínua de print, e cada print abre numa lente
+que dá pra ler inteiro.
+
+Cada card precisa de **duas imagens** em `assets/img/`:
+
+```
+dep-05.webp        480px de largura, é o que aparece no card
+dep-05-full.webp   1000px de largura, é o que abre na lente
+```
+
+Pra gerar as duas a partir de um print novo:
+
+```
+ffmpeg -i print.png -vf "scale=480:-2"  -q:v 78 assets/img/dep-09.webp
+ffmpeg -i print.png -vf "scale=1000:-2" -q:v 80 assets/img/dep-09-full.webp
+```
+
+Depois copiar um bloco `<a class="prova-c">` no `index.html`, trocar o número do
+arquivo, o `data-tit`, o `data-leg`, o texto visível e o `alt`. **O `data-i`
+precisa ser o índice do card na ordem, começando em zero**, senão a lente abre no
+print errado. A esteira duplica os cards sozinha pelo JavaScript, não precisa
+colar duas vezes.
+
+Pra tirar um card, apagar o bloco inteiro e **renumerar os `data-i`** dos que
+vêm depois.
+
+### Antes de publicar um print novo
+
+Print de WhatsApp é dado de outra pessoa. Antes de subir:
+
+1. Borrar telefone, e-mail e endereço
+2. Borrar qualquer coisa que um paciente tenha escrito sobre a saúde dele.
+   Isso é dado sensível e não pode aparecer, ainda mais numa página que promete
+   comunicação dentro do que o conselho permite
+3. Nome de clínica pode ficar, com autorização dela. Nome de paciente, nunca
+
+Pra borrar um pedaço da imagem sem abrir editor:
+
+```
+ffmpeg -i entrada.png -filter_complex "[0:v]crop=L:A:X:Y,boxblur=20:3[b];[0:v][b]overlay=X:Y" saida.png
+```
+
+`L` e `A` são a largura e a altura do pedaço, `X` e `Y` o canto de cima à
+esquerda dele, em pixel da imagem original.
 
 ### Mudar uma cor
 

@@ -677,6 +677,120 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
   font-style:normal;font-size:.72rem;letter-spacing:.19em;text-transform:uppercase;color:var(--txt-2);
 }
 
+
+/* =========================================================================
+   PROVAS
+   Esteira continua de print, com lente que abre o print inteiro.
+   A pista carrega os cards DUAS vezes: a animacao anda ate -50% e volta
+   ao zero no mesmo desenho, entao a emenda nao aparece.
+   ========================================================================= */
+
+.provas-jan{
+  position:relative;
+  margin-top:clamp(2rem,4vw,3rem);
+  overflow:hidden;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.provas-pista{
+  display:flex;gap:1.15rem;width:max-content;
+  padding-inline:var(--pad);
+  animation:esteira 78s linear infinite;
+}
+.provas-jan:hover .provas-pista,
+.provas-jan:focus-within .provas-pista,
+body.lente-on .provas-pista{animation-play-state:paused}
+@keyframes esteira{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+.prova-c{
+  flex:none;width:272px;
+  display:flex;flex-direction:column;
+  padding:.75rem .75rem 1.1rem;
+  background:linear-gradient(180deg,#100E0A,#080706);
+  border:1px solid var(--borda);border-radius:8px;
+  color:inherit;text-decoration:none;
+  transition:transform .35s var(--saida),border-color .35s var(--suave),box-shadow .35s var(--suave);
+}
+.prova-c:hover{transform:translateY(-4px);border-color:#3a2c10;box-shadow:0 22px 46px -26px #000}
+.prova-c:focus-visible{outline:2px solid var(--ouro);outline-offset:3px}
+
+.prova-foto{
+  position:relative;display:block;
+  border-radius:5px;overflow:hidden;
+  background:#0c0a07;
+}
+.prova-foto img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:top center}
+.prova-foto::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.72));
+  opacity:0;transition:opacity .35s var(--suave);
+}
+.prova-c:hover .prova-foto::after,
+.prova-c:focus-visible .prova-foto::after{opacity:1}
+.prova-foto::before{
+  content:"Ampliar";
+  position:absolute;z-index:2;left:50%;bottom:.9rem;transform:translate(-50%,8px);
+  padding:.42rem .9rem;border-radius:99px;
+  background:var(--metal);color:#120C02;
+  font:600 .68rem/1 var(--corpo);letter-spacing:.16em;text-transform:uppercase;
+  opacity:0;transition:opacity .35s var(--suave),transform .35s var(--saida);
+}
+.prova-c:hover .prova-foto::before,
+.prova-c:focus-visible .prova-foto::before{opacity:1;transform:translate(-50%,0)}
+
+.prova-tit{
+  display:block;margin:.95rem 0 .35rem;
+  font:600 .72rem/1 var(--corpo);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ouro);
+}
+.prova-leg{display:block;font-size:.86rem;line-height:1.5;color:var(--txt-2)}
+
+.provas-nota{
+  margin:clamp(2rem,4vw,2.8rem) auto 0;max-width:64ch;text-align:center;
+  font-size:.8rem;line-height:1.6;color:#7d7565;
+}
+
+/* --- a lente --- */
+.lente{
+  width:min(560px,92vw);max-width:none;max-height:92svh;
+  padding:0;border:1px solid #2a2110;border-radius:10px;
+  background:linear-gradient(180deg,#100E0A,#070605);
+  color:var(--txt);overflow:visible;
+}
+.lente::backdrop{background:rgba(0,0,0,.86);backdrop-filter:blur(4px)}
+.lente[open]{animation:lenteEntra .35s var(--saida) both}
+@keyframes lenteEntra{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+
+.lente-in{margin:0;display:flex;flex-direction:column}
+.lente-in img{
+  display:block;width:100%;height:auto;
+  max-height:74svh;object-fit:contain;
+  border-radius:9px 9px 0 0;background:#000;
+}
+.lente-cap{padding:1.05rem 1.25rem 1.2rem;border-top:1px solid #201a0c}
+.lente-tit{
+  display:block;margin-bottom:.35rem;
+  font:600 .72rem/1 var(--corpo);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ouro);
+}
+.lente-leg{display:block;font-size:.9rem;line-height:1.55;color:var(--txt-2)}
+
+.lente-x,.lente-nav{
+  position:absolute;z-index:3;
+  display:grid;place-items:center;
+  width:42px;height:42px;padding:0;
+  border:1px solid #3a2c10;border-radius:99px;
+  background:rgba(8,7,6,.9);color:var(--ouro);
+  font:400 1.5rem/1 var(--corpo);cursor:pointer;
+  transition:border-color .25s var(--suave),background .25s var(--suave),transform .25s var(--saida);
+}
+.lente-x:hover,.lente-nav:hover{border-color:var(--ouro);background:#12100C;transform:scale(1.06)}
+.lente-x:focus-visible,.lente-nav:focus-visible{outline:2px solid var(--ouro);outline-offset:3px}
+.lente-x{top:-14px;right:-14px;font-size:1.35rem}
+.lente-nav{top:50%;margin-top:-21px;font-size:1.7rem;line-height:0}
+.lente-ant{left:-21px}
+.lente-prox{right:-21px}
+
 /* =========================================================================
    PLANOS
    ========================================================================= */
@@ -1100,6 +1214,13 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 
 @media (max-width:860px){
   .start-corpo{grid-template-columns:1fr}
+  .prova-c{width:232px}
+  .lente-x{top:-12px;right:-12px}
+  /* nao dá margem pra seta flutuar fora: ela desce pro rodapé da legenda */
+  .lente-nav{width:38px;height:38px;top:auto;bottom:.85rem;margin-top:0}
+  .lente-ant{left:auto;right:3.85rem}
+  .lente-prox{right:.85rem}
+  .lente-cap{padding-right:7rem}
   .nav{
     position:fixed;inset:0 0 auto;top:0;
     flex-direction:column;gap:0;margin:0;
@@ -1178,6 +1299,7 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
 
 @media (max-width:520px){
   .card,.plano{padding-inline:1.35rem}
+  .prova-c{width:206px}
   .start{padding-inline:1.25rem}
   .start-preco-bl,.start-inc{padding-inline:1.2rem}
   .prova-lista li:not(:last-child)::after{width:7px;height:7px}
@@ -1198,6 +1320,10 @@ html{scrollbar-color:var(--ouro-qm) #000;scrollbar-width:thin}
   }
   .rev{opacity:1;transform:none}
   .zap{opacity:1;transform:none;pointer-events:auto}
+  /* sem esteira: a faixa vira rolagem normal, com as bordas inteiras */
+  .provas-pista{animation:none !important}
+  .provas-jan{overflow-x:auto;-webkit-mask:none;mask:none}
+  .lente[open]{animation:none !important}
 }
 
 /* o rei de xadrez ocupa a faixa esquerda; o conteúdo desliza pra direita */
